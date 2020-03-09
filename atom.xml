@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cchen7.github.io</id>
     <title>CC&apos;s Weblog</title>
-    <updated>2020-03-09T13:29:16.993Z</updated>
+    <updated>2020-03-09T14:05:47.565Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cchen7.github.io"/>
     <link rel="self" href="https://cchen7.github.io/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, CC&apos;s Weblog</rights>
     <entry>
         <title type="html"><![CDATA[专线太贵，多云连接可以这样做]]></title>
-        <id>https://cchen7.github.io/post/using-vgw-connect-aws</id>
-        <link href="https://cchen7.github.io/post/using-vgw-connect-aws">
+        <id>https://cchen7.github.io/post/using-vgw-connect-aws/</id>
+        <link href="https://cchen7.github.io/post/using-vgw-connect-aws/">
         </link>
         <updated>2020-03-09T12:44:53.000Z</updated>
         <content type="html"><![CDATA[<p>AWS虚拟专用网络(AWS VPN)允许您建立从您的网络或设备到 AWS 全球网络的安全和专用的隧道。 Aws VPN 由两个业务组成: AWS Site to Site VPN 和 AWS Client VPN。 AWS Site to Site VPN使您能够安全地将您的生产环境或分支办公室连接到您的 Amazon 虚拟私有云(Amazon VPC)。 AWS Client VPN使您能够安全地将用户连接到 AWS 或生产环境网络。</p>
@@ -109,8 +109,8 @@ Ping对方的内网地址，由于已经在VPC上指定了路由表，因此服�
     </entry>
     <entry>
         <title type="html"><![CDATA[2014希腊旅行&攻略]]></title>
-        <id>https://cchen7.github.io/post/2014-greece-traval</id>
-        <link href="https://cchen7.github.io/post/2014-greece-traval">
+        <id>https://cchen7.github.io/post/2014-greece-traval/</id>
+        <link href="https://cchen7.github.io/post/2014-greece-traval/">
         </link>
         <updated>2020-02-06T03:32:15.000Z</updated>
         <summary type="html"><![CDATA[<p>//本文写作与2014年，距今已六年，文中信息可能不具有参考价值，仅为搬运存档。</p>
