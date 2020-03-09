@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>专线太贵，多云连接可以这样做 | CC&#39;s Weblog</title>
+<meta name="description" content="个人站点">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://cchen7.github.io/favicon.ico?v=1583760550592">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://cchen7.github.io/styles/main.css">
+
+
+  
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css" />
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://cchen7.github.io">
+        <img src="https://cchen7.github.io/images/avatar.png?v=1583760550592" class="site-logo">
+        <h1 class="site-title">CC&#39;s Weblog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      个人站点
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com" target="_blank">GitHub</a> | <a class="rss" href="https://cchen7.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">专线太贵，多云连接可以这样做</h2>
+            <div class="post-date">2020-03-09</div>
+            
+              <div class="feature-container" style="background-image: url('https://cchen7.github.io/post-images/using-vgw-connect-aws.png')">
+              </div>
+            
+            <div class="post-content">
+              <p>AWS虚拟专用网络(AWS VPN)允许您建立从您的网络或设备到 AWS 全球网络的安全和专用的隧道。 Aws VPN 由两个业务组成: AWS Site to Site VPN 和 AWS Client VPN。 AWS Site to Site VPN使您能够安全地将您的生产环境或分支办公室连接到您的 Amazon 虚拟私有云(Amazon VPC)。 AWS Client VPN使您能够安全地将用户连接到 AWS 或生产环境网络。</p>
+<p>在本文中，您可以学习到如何使用AWS的Site to Site VPN通过Virtual Private Gateway(VGW)连接到阿里云的VPN网关。这是一个相对廉价和安全的解决方案，通过通用的VPN协议加密您的数据传输，使两个不同云厂商之间的数据可以安全传输。避免了使用Internet传输数据带来的安全隐患以及不必架设昂贵的物理专线。适用于需要多云架构部署，又对成本以及实施时间有较高需求的场合。</p>
+<p><img src="https://cchen7.github.io/post-images/1583758208968.png" alt="" loading="lazy"><br>
+图1.1 VPN连接架构图</p>
+<p>本文接下来将展示具体步骤指导您如何使用VGW和VPN来连接阿里云与AWS</p>
+<hr>
+<p>###准备工作</p>
+<ol>
+<li>注册好AWS账户与阿里云账户</li>
+<li>在AWS的新加坡region（ap-southeast-1）创建一个VPC，并设置CIDR为172.31.0.0/16</li>
+<li>在阿里云的新加坡地域创建一个VPC，设置网段为192.168.0.0/16</li>
+<li>在AWS的VPC中创建一个子网subnet，设置网段为172.31.1.0/24</li>
+<li>在阿里云的VPC中创建一个子网，设置网段为192.168.1.0/24</li>
+</ol>
+<p>###步骤一：在阿里云配置VPN网关</p>
+<ol>
+<li>打开阿里云控制台，选择专有网络，在左侧找到VPN网关，点击创建VPN网关<br>
+<img src="https://cchen7.github.io/post-images/1583758340778.png" alt="" loading="lazy"></li>
+</ol>
+<p>这里选择最小带宽的实例规格，您可以根据业务需求选择合适的带宽，阿里云的VPN网关不支持按需流量计费模式。<br>
+<img src="https://cchen7.github.io/post-images/1583758348361.png" alt="" loading="lazy"></p>
+<p>创建完成<br>
+<img src="https://cchen7.github.io/post-images/1583758385743.png" alt="" loading="lazy"></p>
+<p>接下来创建用户网关<br>
+<img src="https://cchen7.github.io/post-images/1583758501226.png" alt="" loading="lazy"></p>
+<p>###步骤二 在AWS创建虚拟专用网关</p>
+<ol>
+<li>打开VPC控制台，在左侧找到虚拟专用网关，点击创建虚拟专用网关</li>
+</ol>
+<p><img src="https://cchen7.github.io/post-images/1583758511642.png" alt="" loading="lazy"><br>
+<img src="https://cchen7.github.io/post-images/1583758526618.png" alt="" loading="lazy"><br>
+2.	创建后VGW是detached状态。需将VGW附加到VPC<br>
+<img src="https://cchen7.github.io/post-images/1583758539291.png" alt="" loading="lazy"></p>
+<ol start="3">
+<li>创建客户网关<br>
+<img src="https://cchen7.github.io/post-images/1583758546789.png" alt="" loading="lazy"><br>
+在IP地址处输入之前阿里云的VPN网关地址</li>
+</ol>
+<p>###步骤三 在AWS创建VPN连接<br>
+点击左侧VPN连接选项，创建一个VPN连接。<br>
+<img src="https://cchen7.github.io/post-images/1583758557072.png" alt="" loading="lazy"><br>
+这里选择之前创建好的客户网关和虚拟专用网关<br>
+<img src="https://cchen7.github.io/post-images/1583758565790.png" alt="" loading="lazy"></p>
+<p>隧道选项由AWS自动生成，点击创建</p>
+<p>创建好以后我们可以看到VPN连接处于待处理状态，此时我们需要获得这个隧道的相关信息，选择下载配置<br>
+<img src="https://cchen7.github.io/post-images/1583758576107.png" alt="" loading="lazy"></p>
+<p>选择标准的Openswan格式配置</p>
+<p>打开配置可以找到两个隧道，任意选择一个即可<br>
+<img src="https://cchen7.github.io/post-images/1583758749003.png" alt="" loading="lazy"></p>
+<p>我们这里需要隧道的对外IP地址以及PSK key</p>
+<p>###步骤四 阿里云VPN连接配置</p>
+<ol>
+<li>回到阿里云控制台，创建一个客户网关，填入上一步创建的隧道外网ip<br>
+<img src="https://cchen7.github.io/post-images/1583758771835.png" alt="" loading="lazy"></li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://cchen7.github.io/post-images/1583760182997.png" alt="" loading="lazy"></figure>
+<p>然后创建一个VPN连接<br>
+<img src="https://cchen7.github.io/post-images/1583760207064.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="2"><img src="https://cchen7.github.io/post-images/1583760220963.png" alt="" loading="lazy"></figure>
+<p>在高级选项内填入AWS提供的密钥</p>
+<p>创建后就可以看到两边的VPN连接起来了<br>
+<img src="https://cchen7.github.io/post-images/1583760229030.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="3"><img src="https://cchen7.github.io/post-images/1583760242196.png" alt="" loading="lazy"></figure>
+<p>###步骤五 在两端分别添加对应的路由</p>
+<p>阿里云侧<br>
+<img src="https://cchen7.github.io/post-images/1583760248879.png" alt="" loading="lazy"></p>
+<p>添加AWS侧的网段并把下一条指向VPN网关</p>
+<p>AWS侧<br>
+<img src="https://cchen7.github.io/post-images/1583760413893.png" alt="" loading="lazy"></p>
+<p>测试连接<br>
+在两边对应的子网内分别创建一台虚拟机</p>
+<figure data-type="image" tabindex="4"><img src="https://cchen7.github.io/post-images/1583760444027.png" alt="" loading="lazy"></figure>
+<p><img src="https://cchen7.github.io/post-images/1583760452575.png" alt="" loading="lazy"><br>
+Ping对方的内网地址，由于已经在VPC上指定了路由表，因此服务器内部无需再设置路由</p>
+<figure data-type="image" tabindex="5"><img src="https://cchen7.github.io/post-images/1583760456841.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://cchen7.github.io/post-images/1583760462409.png" alt="" loading="lazy"></figure>
+<p>至此，整个配置完成。</p>
+<blockquote>
+<p>注意事项</p>
+</blockquote>
+<ol>
+<li>AWS的VGW默认没有带公网ip地址，需要建立VPN以后从VPN配置内获取，因此操作顺序不可更改。否则阿里云侧用户网关将因为没有对端IP地址而无法建立。</li>
+<li>两侧VPC网段不可重叠，在前期规划时需要注意，VPC的网段创建后就无法更改了。</li>
+<li>VPN流量还是承载在公网上，只是做了加密。对安全，稳定性，时延有更高需求的场景请使用AWS Direct Connect物理专线进行互联。</li>
+<li>可设置多个隧道保证连接的高可用，本文在此就不多做赘述了。</li>
+</ol>
+<hr>
+<p>企业上云咨询 架构设计优化  行业解决方案<br>
+<img src="https://cchen7.github.io/post-images/1583760540943.png" alt="" loading="lazy"></p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://cchen7.github.io/tag/zXj7J_e38" class="tag">
+                    Cloud
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://cchen7.github.io/post/2014-greece-traval">
+                  <h3 class="post-title">
+                    2014希腊旅行&amp;攻略
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+
+              
+                <div id="disqus_thread" data-aos="fade-in"></div>
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+
+  
+    <script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+    <script>
+
+    var options = {
+      shortname: 'cc-blog',
+      apikey: '8zgGTPmCBP0SnvxqKtIwB1J5KzTGjMSthLlLlTK18fgmzzsidcjTbgBB9Km3PgPt',
+    }
+    if ('https://disqus.com/api/') {
+      options.api = 'https://disqus.com/api/'
+    }
+    var dsqjs = new DisqusJS(options)
+
+    </script>
+  
+
+
+
+
+  </body>
+</html>
