@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cchen7.github.io</id>
     <title>CC&apos;s Weblog</title>
-    <updated>2020-03-09T14:22:02.439Z</updated>
+    <updated>2020-03-09T14:24:43.598Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cchen7.github.io"/>
     <link rel="self" href="https://cchen7.github.io/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, CC&apos;s Weblog</rights>
     <entry>
         <title type="html"><![CDATA[上云迁移之后的六件事]]></title>
-        <id>https://cchen7.github.io/post/shang-yun-qian-yi-zhi-hou-de-liu-jian-shi/</id>
-        <link href="https://cchen7.github.io/post/shang-yun-qian-yi-zhi-hou-de-liu-jian-shi/">
+        <id>https://cchen7.github.io/post/6things-after-cloud-migration/</id>
+        <link href="https://cchen7.github.io/post/6things-after-cloud-migration/">
         </link>
         <updated>2020-03-09T14:09:05.000Z</updated>
         <content type="html"><![CDATA[<p>云迁移项目遵循与其他复杂项目一样的原则，有系统的规划和适当的准备，可以让云迁移顺利的实施。“分而治之”在信息技术领域是常见的一种方法，云迁移项目的制定和运行也依据这个理论。<br>
