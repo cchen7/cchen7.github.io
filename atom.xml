@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cchen7.github.io</id>
     <title>CC&apos;s Weblog</title>
-    <updated>2020-03-09T14:24:43.598Z</updated>
+    <updated>2020-03-15T10:59:21.922Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cchen7.github.io"/>
     <link rel="self" href="https://cchen7.github.io/atom.xml"/>
@@ -11,6 +11,73 @@
     <icon>https://cchen7.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, CC&apos;s Weblog</rights>
     <entry>
+        <title type="html"><![CDATA[自动化备份解决方案AWS Backup快速入门]]></title>
+        <id>https://cchen7.github.io/post/zi-dong-hua-bei-fen-jie-jue-fang-an-aws-backup-kuai-su-ru-men/</id>
+        <link href="https://cchen7.github.io/post/zi-dong-hua-bei-fen-jie-jue-fang-an-aws-backup-kuai-su-ru-men/">
+        </link>
+        <updated>2020-03-15T10:48:59.000Z</updated>
+        <content type="html"><![CDATA[<p>关键词：AWS Backup，备份，EBS<br>
+适读水平：AWS入门水平<br>
+适读职业：运维人员<br>
+应用场景：数据备份</p>
+<p>近日，AWS在中国北京区域和宁夏区域上线了AWS Backup服务。AWS Backup 是一种完全托管、基于策略的备份解决方案，可以在云中以及本地跨 AWS 服务轻松地自动备份应用程序数据。本文来介绍一下AWS Backup的基本使用，让您能快速上手这个备份服务。</p>
+<p>在一个复杂的工作负载架构中，存在有很多不同的数据，比如EBS的快照，EFS的卷，以及RDS数据库等。虽然这些服务AWS都提供了相应的备份功能，例如EC2的生命周期管理，但对于运维人员来说如果能有一个服务自动化的统一管理这些备份，会有效提高数据管理的效率。 在过去，在AWS上实现自动化备份管理，可能需要用到自己编写的脚本调用api或者Lambda函数。AWS Backup提供了一个统一的管理门户去管理备份任务，并定期将备份同步到冷存储。可以看下AWS Backup的架构图。<br>
+<img src="https://cchen7.github.io/post-images/1584269489064.png" alt="" loading="lazy"></p>
+<h2 id="aws-backup的优势">AWS Backup的优势</h2>
+<h3 id="集中管理备份">集中管理备份</h3>
+<p>从中央备份控制台配置备份策略，简化备份管理，并轻松确保各种 AWS 服务中的应用程序数据得到备份和保护。通过 AWS Backup 的中央控制台、API 或者命令行界面使用 AWS Storage Gateway 针对云中和本地的各种 AWS 服务进行备份、还原和设置保留策略。</p>
+<h3 id="自动执行备份流程">自动执行备份流程</h3>
+<p>利用 AWS Backup 完全托管并且基于策略的解决方案节省时间和资金。AWS Backup 支持自动备份计划、保留管理和生命周期管理，不需要使用自定义脚本和手动流程。利用 AWS Backup，只要标记 AWS 资源就可以将备份策略应用于AWS 资源，从而轻松地对所有 AWS 资源实施备份策略，并确保所有应用程序数据都得到正确备份。</p>
+<h3 id="提高备份合规性">提高备份合规性</h3>
+<p>在中央控制台执行备份策略、加密备份以及审核备份活动，满足备份合规性要求。备份策略可以轻松与内部要求或监管要求保持一致。AWS Backup 可以加密动态数据和静态数据，保证备份的安全性。不同 AWS 服务采用统一的备份活动日志，可以简化合规审核工作。AWS Backup 符合 PCI、ISO 和 HIPAA 的规定。</p>
+<h2 id="aws-backup的常用场景">AWS  Backup的常用场景</h2>
+<h3 id="云备份">云备份</h3>
+<p>AWS Backup 提供中央控制台，可以自动执行和管理不同 AWS 服务的备份工作。AWS Backup 与 Amazon EBS、Amazon RDS、Amazon DynamoDB、Amazon EFS 和 AWS Storage Gateway 集成，让您可以备份存储卷、数据库和文件系统等重要数据存储。在未来也可能支持更多的AWS服务数据备份。<br>
+<img src="https://cchen7.github.io/post-images/1584269525956.png" alt="" loading="lazy"></p>
+<p>###混合云备份<br>
+AWS Backup 可以提供一种通用的方式来备份云中和本地的应用程序数据。AWS Backup 与 AWS Storage Gateway 集成，而 AWS Storage Gateway 是一种混合存储服务，让您的本地应用程序能够无缝地使用 AWS 云存储。这种集成让您能够将同样的备份策略应用到 AWS 云资源和存储在 AWS Storage Gateway 卷内的本地数据中。<br>
+<img src="https://cchen7.github.io/post-images/1584269532925.png" alt="" loading="lazy"></p>
+<h3 id="本地数据备份">本地数据备份</h3>
+<p>AWS Backup 可以提供一种通用的方式来备份云中和本地的应用程序数据。AWS Backup 与 AWS Storage Gateway 集成，而 AWS Storage Gateway 是一种混合存储服务，让您的本地应用程序能够无缝地使用 AWS 云存储。您可以使用 AWS Backup 来备份存储在 AWS Storage Gateway 卷内的本地应用程序数据。AWS Storage Gateway 卷的备份安全地存储在 AWS 云中并且与 Amazon EBS 兼容，可以将卷还原到 AWS 云或本地环境中。<br>
+<img src="https://cchen7.github.io/post-images/1584269545557.png" alt="" loading="lazy"></p>
+<h2 id="快速上手">快速上手</h2>
+<h3 id="备份计划">备份计划</h3>
+<p>首先登录AWS Backup控制面板，可以看到有三个选项<br>
+管理备份计划，按需备份，还原备份<br>
+<img src="https://cchen7.github.io/post-images/1584269558488.png" alt="" loading="lazy"><br>
+我们先创建一个备份计划<br>
+AWS内置了几个默认备份计划，可以按需要选择。这里我们选择创建新计划。<br>
+<img src="https://cchen7.github.io/post-images/1584269567289.png" alt="" loading="lazy"><br>
+首先定义备份的频率，除了每日，每周等常见选择。可以使用cron表达式来定义备份频率，如果您在服务器上已经配置过crontab定时任务，就可以把任务的时间配置直接贴进去，很方便。<br>
+<img src="https://cchen7.github.io/post-images/1584269589039.png" alt="" loading="lazy"><br>
+然后是备份的时间窗口，就是备份任务开始执行的时间和执行的时间范围。如果备份数据量较大，我们需要加大时间窗口避免任务超时。</p>
+<p>在备份EFS数据的时候，可以把数据转为冷存储，冷存储的价格仅为普通存储的20%，很适合长期归档的业务。<br>
+在这里我们引入一个保管库的概念，所有的AWS Backup数据都存储在保管库中，这个保管库会使用KMS中的主密钥对数据进行加密，来满足安全和合规性要求。<br>
+<img src="https://cchen7.github.io/post-images/1584269608122.png" alt="" loading="lazy"></p>
+<p>同时AWS Backup还支持将备份数据同步到其他区域，这样就实现了异地备份的需求。<br>
+<img src="https://cchen7.github.io/post-images/1584269622722.png" alt="" loading="lazy"></p>
+<p>在创建完备份计划后就可以向计划内分配资源了<br>
+<img src="https://cchen7.github.io/post-images/1584269631355.png" alt="" loading="lazy"></p>
+<p>支持根据资源ID和tag两种模式进行分配，通过tag可以很容易批量定义要备份的相关资源。<br>
+分配好资源后就可以等待备份按计划自动执行了。<br>
+<img src="https://cchen7.github.io/post-images/1584269640605.png" alt="" loading="lazy"></p>
+<h3 id="资源和任务">资源和任务</h3>
+<p>在左侧的导航菜单里可以选择查看受保护的资源，也就是被分配到备份计划内的资源，可以查找和筛选确保重要资源没有遗漏。<br>
+<img src="https://cchen7.github.io/post-images/1584269705193.png" alt="" loading="lazy"><br>
+以及可以查看备份任务的执行情况<br>
+<img src="https://cchen7.github.io/post-images/1584269710677.png" alt="" loading="lazy"></p>
+<h3 id="备份保管库">备份保管库</h3>
+<p>在备份保管库里我们可以看到每个备份的情况，包括恢复点，资源ID，到期时间等。可以在这里选择相应的恢复点进行还原操作<br>
+<img src="https://cchen7.github.io/post-images/1584269717874.png" alt="" loading="lazy"></p>
+<p>同时还可以定义访问策略，对备份数据的访问进行控制。</p>
+<h2 id="总结">总结</h2>
+<p>AWS Backup服务将各资源的备份功能整合在一个统一入口，并提供了方便简单的操作模式，更重要的是这个服务本身是免费的。只对备份占用的存储资源和还原数据的大小进行收费。符合云计算按需使用按需付费计费原则。建议在生产环境上进行配置使用，毕竟云上的数据安全是非常重要的。</p>
+<hr>
+<p>企业上云咨询 架构设计优化  行业解决方案<br>
+<img src="https://cchen7.github.io/post-images/1583760540943.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[上云迁移之后的六件事]]></title>
         <id>https://cchen7.github.io/post/6things-after-cloud-migration/</id>
         <link href="https://cchen7.github.io/post/6things-after-cloud-migration/">
@@ -18,27 +85,27 @@
         <updated>2020-03-09T14:09:05.000Z</updated>
         <content type="html"><![CDATA[<p>云迁移项目遵循与其他复杂项目一样的原则，有系统的规划和适当的准备，可以让云迁移顺利的实施。“分而治之”在信息技术领域是常见的一种方法，云迁移项目的制定和运行也依据这个理论。<br>
 如果您已经制定且实施了一个云迁移计划，并把所有的工作负载都运行在云端，这是否就意味着上云已经完成了呢？今天这篇文章就会告诉你迁移只是上云的一部分，有几个任务需要立刻跟进执行，并不断迭代。</p>
-<p>##关闭和退休</p>
+<h2 id="关闭和退休">关闭和退休</h2>
 <p>可能你经过了一夜奋战，所有系统正常上线运行稳定，运维团队是否可以互相击掌庆祝了呢？然而，上云之后的善后工作也是非常重要的。在迁移任务运行期间，您是否启用了临时账户？是否开放了临时端口？旧生产环境是否还在不断产生数据？立刻进行清理和关闭，包括临时的测试环境，冗余的系统，多余的网络连接。<br>
-从运维的角度来看，这些动作是非常必要的。运行这些旧环境额外资源的成本是一回事，但是随着时间的推移，这些系统很容易被遗忘。虽然你的生产环境已经切换，这些旧系统的存在会导致操作混乱和潜在的安全隐患。应该采取行动，对此类系统和连接进行受控且有限的“退役”处理。<br>
-##验证和评估</p>
+从运维的角度来看，这些动作是非常必要的。运行这些旧环境额外资源的成本是一回事，但是随着时间的推移，这些系统很容易被遗忘。虽然你的生产环境已经切换，这些旧系统的存在会导致操作混乱和潜在的安全隐患。应该采取行动，对此类系统和连接进行受控且有限的“退役”处理。</p>
+<h2 id="验证和评估">验证和评估</h2>
 <p>在云迁移项目的设计中，当实施环节完成后，必须有一个评估环节来确认是否成功完成了所有预定的工作。<br>
 第一个参考点是在项目立项阶段确认的最先上云的业务系统。因为很多大型云迁移项目不是一蹴而就的，顺利完成第一个系统的迁移会为整个项目顺利运行带来信心。需要所有的相关部门共同确认并认可云迁移的价值。另一个点是验收检查表，把这个表列为KPI并详细审计，并由相关人员签字确认。<br>
-后者是完成项目的重要依据。在衡量完成度标准时，应该注意检查表项目上的度量值需足够精确，不会产生混淆。包括资产清单，系统权限，工作状态等种种参数，并且很多目标对象在迁移前后都始终存在，所以确保检查好系统的每一个关键点。这种迁移前后的评估和记录非常重要，因为它可以让团队真实地了解他们的目标和做出的任何决定。 同时，它也是项目成功的最重要凭据。<br>
-##成本</p>
+后者是完成项目的重要依据。在衡量完成度标准时，应该注意检查表项目上的度量值需足够精确，不会产生混淆。包括资产清单，系统权限，工作状态等种种参数，并且很多目标对象在迁移前后都始终存在，所以确保检查好系统的每一个关键点。这种迁移前后的评估和记录非常重要，因为它可以让团队真实地了解他们的目标和做出的任何决定。 同时，它也是项目成功的最重要凭据。</p>
+<h2 id="成本">成本</h2>
 <p>选型是云迁移中非常容易被忽略的一环。一些项目在快速决策中倾向于沿用与旧环境一致的规格，这虽然可以减少因配置容量变动带来的迁移失败风险。但在短期内会增加运营成本，在迁移完成后就应该着手进行成本优化。大部分云平台为基础设施和服务提供了一些折扣优惠，你可以仔细研究并寻找节省成本的关键点。也可以尝试使用云平台提供的免费工具来提供辅助决策，例如AWS Cost explorer和AWS Trusted Advisor,它们可以帮助你更好的识别任何潜在的节约成本的机会。<br>
-云成本优化对提升整个项目ROI（投资回报率）可以起到立竿见影的效果。此外，通过向供应商承诺一定的用量，可以很容易确认哪些资源是长期使用的，哪些机型可以获得优惠定价。在某些情况下，可以通过标准化某些实例类型或实例家族来进一步节省开支。应该定期进行成本审查，以确定有多少资源可以从这些折扣中受益。<br>
-##重构</p>
+云成本优化对提升整个项目ROI（投资回报率）可以起到立竿见影的效果。此外，通过向供应商承诺一定的用量，可以很容易确认哪些资源是长期使用的，哪些机型可以获得优惠定价。在某些情况下，可以通过标准化某些实例类型或实例家族来进一步节省开支。应该定期进行成本审查，以确定有多少资源可以从这些折扣中受益。</p>
+<h2 id="重构">重构</h2>
 <p>说到成本优化，另一种方法是重构你的系统，以便他们能够收益于随需应变的资源提供，例如采用“Fuction as a Service”的无服务器架构，或者将应用改造成无状态化便于分布式和扩展。在这样的架构下，基础设施可以在工作期间部署，然后销毁。<br>
 通过使用云原生技术和方法论可以找到重构的成本收益。最好的部分在于，由于公有云的特性，这种重构可以在不影响生产环境的情况下独立进行，并且可以在全面接近生产环境的情况下进行全面测试和验证。<br>
-也可以通过部分改进和快速迭代的方式随着时间推移来进行重构，这项工作应该成为持续改进应用程序性能的一部分。<br>
-##安全</p>
+也可以通过部分改进和快速迭代的方式随着时间推移来进行重构，这项工作应该成为持续改进应用程序性能的一部分。</p>
+<h2 id="安全">安全</h2>
 <p>在迁移期间的共存阶段，安全策略必须允许两个环境上的应用程序之间可以互相通信和访问。这些安全策略需要在旧的系统关闭后立刻进行检查。<br>
-有一种做法是倾向于等到所有遗留应用程序退役，但这样做会在这个漫长的过程期间引入安全风险。虽然这是一个不太能创造价值的任务，但对于减少安全风险符合合规性要求都能带来帮助，所以最好尽快处理。安全检查不应该仅限于遗留工作负载，云平台的安全性与传统环境有所不同，迁移提供了一个测试可用功能并尽可能利用这些新功能的机会。<br>
-##团队</p>
+有一种做法是倾向于等到所有遗留应用程序退役，但这样做会在这个漫长的过程期间引入安全风险。虽然这是一个不太能创造价值的任务，但对于减少安全风险符合合规性要求都能带来帮助，所以最好尽快处理。安全检查不应该仅限于遗留工作负载，云平台的安全性与传统环境有所不同，迁移提供了一个测试可用功能并尽可能利用这些新功能的机会。</p>
+<h2 id="团队">团队</h2>
 <p>在迁移过程中，可能有多方人员参与到一个虚拟小组或虚拟部门，经过了许多起起伏伏，这不仅可以增进彼此之间的感情还培养和学习到了很多知识。<br>
-这些经验和知识是无价的，如果这个团队完全解散，回到他们的日常工作，那将是一个很大的损失。团队的技术成员可能会继续使用新的平台，但是其他成员也将拥有整个过程的宝贵知识，不应该被忽视。通过长期保持团队的“卓越中心”地位来保存这些知识和经验是有意义的。可以为它预留一些时间并定期举行会议，以便为战略决策作出辅助依据或决定。<br>
-##总结</p>
+这些经验和知识是无价的，如果这个团队完全解散，回到他们的日常工作，那将是一个很大的损失。团队的技术成员可能会继续使用新的平台，但是其他成员也将拥有整个过程的宝贵知识，不应该被忽视。通过长期保持团队的“卓越中心”地位来保存这些知识和经验是有意义的。可以为它预留一些时间并定期举行会议，以便为战略决策作出辅助依据或决定。</p>
+<h2 id="总结">总结</h2>
 <p>迁移到云并非易事，但一旦成功实现，云将为基础设施和业务转化为与现代架构相一致提供更多可能性。<br>
 本位并非事无巨细的罗列了云迁移之后要考虑的所有事情，但这是一个良好的开端。随着云技术的发展，您会发现您的业务将没有限制，真正实现数字化。</p>
 <hr>
@@ -58,7 +125,7 @@
 图1.1 VPN连接架构图</p>
 <p>本文接下来将展示具体步骤指导您如何使用VGW和VPN来连接阿里云与AWS</p>
 <hr>
-<p>###准备工作</p>
+<h3 id="准备工作">准备工作</h3>
 <ol>
 <li>注册好AWS账户与阿里云账户</li>
 <li>在AWS的新加坡region（ap-southeast-1）创建一个VPC，并设置CIDR为172.31.0.0/16</li>
@@ -66,7 +133,7 @@
 <li>在AWS的VPC中创建一个子网subnet，设置网段为172.31.1.0/24</li>
 <li>在阿里云的VPC中创建一个子网，设置网段为192.168.1.0/24</li>
 </ol>
-<p>###步骤一：在阿里云配置VPN网关</p>
+<h3 id="步骤一在阿里云配置vpn网关">步骤一：在阿里云配置VPN网关</h3>
 <ol>
 <li>打开阿里云控制台，选择专有网络，在左侧找到VPN网关，点击创建VPN网关<br>
 <img src="https://cchen7.github.io/post-images/1583758340778.png" alt="" loading="lazy"></li>
@@ -77,7 +144,7 @@
 <img src="https://cchen7.github.io/post-images/1583758385743.png" alt="" loading="lazy"></p>
 <p>接下来创建用户网关<br>
 <img src="https://cchen7.github.io/post-images/1583758501226.png" alt="" loading="lazy"></p>
-<p>###步骤二 在AWS创建虚拟专用网关</p>
+<h3 id="步骤二-在aws创建虚拟专用网关">步骤二 在AWS创建虚拟专用网关</h3>
 <ol>
 <li>打开VPC控制台，在左侧找到虚拟专用网关，点击创建虚拟专用网关</li>
 </ol>
@@ -90,8 +157,8 @@
 <img src="https://cchen7.github.io/post-images/1583758546789.png" alt="" loading="lazy"><br>
 在IP地址处输入之前阿里云的VPN网关地址</li>
 </ol>
-<p>###步骤三 在AWS创建VPN连接<br>
-点击左侧VPN连接选项，创建一个VPN连接。<br>
+<h3 id="步骤三-在aws创建vpn连接">步骤三 在AWS创建VPN连接</h3>
+<p>点击左侧VPN连接选项，创建一个VPN连接。<br>
 <img src="https://cchen7.github.io/post-images/1583758557072.png" alt="" loading="lazy"><br>
 这里选择之前创建好的客户网关和虚拟专用网关<br>
 <img src="https://cchen7.github.io/post-images/1583758565790.png" alt="" loading="lazy"></p>
@@ -102,7 +169,7 @@
 <p>打开配置可以找到两个隧道，任意选择一个即可<br>
 <img src="https://cchen7.github.io/post-images/1583758749003.png" alt="" loading="lazy"></p>
 <p>我们这里需要隧道的对外IP地址以及PSK key</p>
-<p>###步骤四 阿里云VPN连接配置</p>
+<h3 id="步骤四-阿里云vpn连接配置">步骤四 阿里云VPN连接配置</h3>
 <ol>
 <li>回到阿里云控制台，创建一个客户网关，填入上一步创建的隧道外网ip<br>
 <img src="https://cchen7.github.io/post-images/1583758771835.png" alt="" loading="lazy"></li>
@@ -115,7 +182,7 @@
 <p>创建后就可以看到两边的VPN连接起来了<br>
 <img src="https://cchen7.github.io/post-images/1583760229030.png" alt="" loading="lazy"></p>
 <figure data-type="image" tabindex="3"><img src="https://cchen7.github.io/post-images/1583760242196.png" alt="" loading="lazy"></figure>
-<p>###步骤五 在两端分别添加对应的路由</p>
+<h3 id="步骤五-在两端分别添加对应的路由">步骤五 在两端分别添加对应的路由</h3>
 <p>阿里云侧<br>
 <img src="https://cchen7.github.io/post-images/1583760248879.png" alt="" loading="lazy"></p>
 <p>添加AWS侧的网段并把下一条指向VPN网关</p>
@@ -149,9 +216,10 @@ Ping对方的内网地址，由于已经在VPC上指定了路由表，因此服�
         <link href="https://cchen7.github.io/post/2014-greece-traval/">
         </link>
         <updated>2020-02-06T03:32:15.000Z</updated>
-        <summary type="html"><![CDATA[<p>//本文写作与2014年，距今已六年，文中信息可能不具有参考价值，仅为搬运存档。</p>
+        <summary type="html"><![CDATA[<pre><code>本文写作与2014年，距今已六年，文中信息可能不具有参考价值，仅为搬运存档。</code></pre>
 ]]></summary>
-        <content type="html"><![CDATA[<p>//本文写作与2014年，距今已六年，文中信息可能不具有参考价值，仅为搬运存档。</p>
+        <content type="html"><![CDATA[<pre><code>本文写作与2014年，距今已六年，文中信息可能不具有参考价值，仅为搬运存档。
+</code></pre>
 <!-- more -->
 <h2 id="签证准备">签证准备</h2>
 <p>签证中心网址 <a href="http://gr.vfsglobal.cn/guangzhou/index.html">http://gr.vfsglobal.cn/guangzhou/index.html</a><br>

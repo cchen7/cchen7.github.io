@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://cchen7.github.io/favicon.ico?v=1583763880705">
+<link rel="shortcut icon" href="https://cchen7.github.io/favicon.ico?v=1584269958627">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://cchen7.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://cchen7.github.io">
-        <img src="https://cchen7.github.io/images/avatar.png?v=1583763880705" class="site-logo">
+        <img src="https://cchen7.github.io/images/avatar.png?v=1584269958627" class="site-logo">
         <h1 class="site-title">CC&#39;s Weblog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -111,7 +111,7 @@
 图1.1 VPN连接架构图</p>
 <p>本文接下来将展示具体步骤指导您如何使用VGW和VPN来连接阿里云与AWS</p>
 <hr>
-<p>###准备工作</p>
+<h3 id="准备工作">准备工作</h3>
 <ol>
 <li>注册好AWS账户与阿里云账户</li>
 <li>在AWS的新加坡region（ap-southeast-1）创建一个VPC，并设置CIDR为172.31.0.0/16</li>
@@ -119,7 +119,7 @@
 <li>在AWS的VPC中创建一个子网subnet，设置网段为172.31.1.0/24</li>
 <li>在阿里云的VPC中创建一个子网，设置网段为192.168.1.0/24</li>
 </ol>
-<p>###步骤一：在阿里云配置VPN网关</p>
+<h3 id="步骤一在阿里云配置vpn网关">步骤一：在阿里云配置VPN网关</h3>
 <ol>
 <li>打开阿里云控制台，选择专有网络，在左侧找到VPN网关，点击创建VPN网关<br>
 <img src="https://cchen7.github.io/post-images/1583758340778.png" alt="" loading="lazy"></li>
@@ -130,7 +130,7 @@
 <img src="https://cchen7.github.io/post-images/1583758385743.png" alt="" loading="lazy"></p>
 <p>接下来创建用户网关<br>
 <img src="https://cchen7.github.io/post-images/1583758501226.png" alt="" loading="lazy"></p>
-<p>###步骤二 在AWS创建虚拟专用网关</p>
+<h3 id="步骤二-在aws创建虚拟专用网关">步骤二 在AWS创建虚拟专用网关</h3>
 <ol>
 <li>打开VPC控制台，在左侧找到虚拟专用网关，点击创建虚拟专用网关</li>
 </ol>
@@ -143,8 +143,8 @@
 <img src="https://cchen7.github.io/post-images/1583758546789.png" alt="" loading="lazy"><br>
 在IP地址处输入之前阿里云的VPN网关地址</li>
 </ol>
-<p>###步骤三 在AWS创建VPN连接<br>
-点击左侧VPN连接选项，创建一个VPN连接。<br>
+<h3 id="步骤三-在aws创建vpn连接">步骤三 在AWS创建VPN连接</h3>
+<p>点击左侧VPN连接选项，创建一个VPN连接。<br>
 <img src="https://cchen7.github.io/post-images/1583758557072.png" alt="" loading="lazy"><br>
 这里选择之前创建好的客户网关和虚拟专用网关<br>
 <img src="https://cchen7.github.io/post-images/1583758565790.png" alt="" loading="lazy"></p>
@@ -155,7 +155,7 @@
 <p>打开配置可以找到两个隧道，任意选择一个即可<br>
 <img src="https://cchen7.github.io/post-images/1583758749003.png" alt="" loading="lazy"></p>
 <p>我们这里需要隧道的对外IP地址以及PSK key</p>
-<p>###步骤四 阿里云VPN连接配置</p>
+<h3 id="步骤四-阿里云vpn连接配置">步骤四 阿里云VPN连接配置</h3>
 <ol>
 <li>回到阿里云控制台，创建一个客户网关，填入上一步创建的隧道外网ip<br>
 <img src="https://cchen7.github.io/post-images/1583758771835.png" alt="" loading="lazy"></li>
@@ -168,7 +168,7 @@
 <p>创建后就可以看到两边的VPN连接起来了<br>
 <img src="https://cchen7.github.io/post-images/1583760229030.png" alt="" loading="lazy"></p>
 <figure data-type="image" tabindex="3"><img src="https://cchen7.github.io/post-images/1583760242196.png" alt="" loading="lazy"></figure>
-<p>###步骤五 在两端分别添加对应的路由</p>
+<h3 id="步骤五-在两端分别添加对应的路由">步骤五 在两端分别添加对应的路由</h3>
 <p>阿里云侧<br>
 <img src="https://cchen7.github.io/post-images/1583760248879.png" alt="" loading="lazy"></p>
 <p>添加AWS侧的网段并把下一条指向VPN网关</p>
